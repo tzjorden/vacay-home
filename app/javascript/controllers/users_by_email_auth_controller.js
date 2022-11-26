@@ -1,10 +1,12 @@
 import { Controller } from '@hotwired/stimulus';
-import axios from 'axios';
+// import axios from 'axios'
+
 
 export default class extends Controller {
     static targets = ['email', 'submit'];
      
     connect(){
+        console.log("hello");
         this.submitTarget.addEventListener('click', (e) => {
             e.preventDefault();
             //if input is empty 
@@ -12,7 +14,9 @@ export default class extends Controller {
 
             } else {
             
-                axios.get('/api/users_by_email', {
+                // axios.get('/api/users_by_email', {
+                    fetch('/api/users_by_email', {
+
                     params: {
                         email: this.emailTarget.value
                     },
@@ -29,5 +33,5 @@ export default class extends Controller {
                 })
             }
         })
-     }
+      }
 }
