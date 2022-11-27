@@ -6,4 +6,13 @@ class Property < ApplicationRecord
     validates :city, presence: true
     validates :state, presence: true
     validates :country, presence: true
+
+    geocoded_by :address
+
+    # makes a call to the geocode api and gets longitude and latitude of location
+    after_validation :geocode
+
+    def address
+        [state, country].compact.join(',')
+    end
 end
